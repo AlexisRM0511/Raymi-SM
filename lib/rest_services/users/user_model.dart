@@ -25,7 +25,7 @@ class UserModel {
       this.createdAt});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-      id: json["_id"] as String,
+      id: json["id"] as String,
       dni: json["dni"] as String,
       name: json["name"] as String,
       lastname: json["lastname"] as String,
@@ -39,6 +39,7 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    if (id != null) data["id"] = id;
     if (dni != null) data['dni'] = dni;
     if (name != null) data['name'] = name;
     if (lastname != null) data['lastname'] = lastname;
@@ -48,6 +49,7 @@ class UserModel {
     if (password != null) data['password'] = password;
     if (typeUser != null) data['typeUser'] = typeUser.toString();
     if (status != null) data['status'] = status.toString();
+    if (createdAt != null) data['createdAt'] = createdAt.toString();
     return data;
   }
 

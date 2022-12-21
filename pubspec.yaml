@@ -91,8 +91,8 @@ flutter:
   assets:
     - assets/img.png
     - assets/loginLogo.png
-    - assets/default_sue.png
-    - assets/sue_image.png
+    - assets/default_event.png
+    - assets/event_image.png
     - assets/image_not_found.png
     - assets/icon/logo.png
   #   - images/a_dot_ham.jpeg

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/pages/home/widgets/sue_info.dart';
+import '/pages/home/widgets/event_info.dart';
 import '/pages/profile/bloc/profile_bloc.dart';
 import '/pages/profile/widgets/app_bar.dart';
 import '/pages/profile/widgets/button_edit.dart';
 import '/pages/profile/widgets/spinner_loading.dart';
-import '/pages/profile/widgets/sue_list.dart';
-import '/pages/profile/widgets/sue_statistics.dart';
+import '/pages/profile/widgets/event_list.dart';
+import '/pages/profile/widgets/event_statistics.dart';
 import '/pages/profile/widgets/text_profile_datos.dart';
 import '/pages/profile/widgets/text_profile_name.dart';
 
@@ -55,15 +55,15 @@ class _ProfileState extends State<Profile> {
                               text: "Editar Perfil",
                               onPressed: () => profileBloc.add(
                                   UpdateProfileButtonEvent(context: context))),
-                          SuesStatistics(
-                              sueMade: state.sueMade,
-                              sueApproved: state.sueApproved),
-                          SueInfo(
+                          EventsStatistics(
+                              eventMade: state.eventMade,
+                              eventApproved: state.eventApproved),
+                          EventInfo(
                               text: "Denuncias Realizadas por el usuario",
                               onPressed: () =>
                                   profileBloc.add(UserFillEvent())),
-                          SueList(
-                              sueModelList: state.sueModelList,
+                          EventList(
+                              eventModelList: state.eventModelList,
                               message: state.message,
                               isError: state.isError,
                               isLoading: state.isLoading)

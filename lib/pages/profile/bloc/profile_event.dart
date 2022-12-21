@@ -15,9 +15,9 @@ class LeadingIconButtonPressedEvent extends ProfileEvent {
   LeadingIconButtonPressedEvent({required this.context});
 }
 
-class GoSueDetailEvent extends ProfileEvent {
+class GoEventDetailEvent extends ProfileEvent {
   final BuildContext context;
-  final SueModel sue;
+  final EventModel event;
 
-  GoSueDetailEvent({required this.context, required this.sue});
+  GoEventDetailEvent({required this.context, required this.event});
 }

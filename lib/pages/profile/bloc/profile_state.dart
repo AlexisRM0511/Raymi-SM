@@ -1,11 +1,11 @@
 part of 'profile_bloc.dart';
 
 class ProfileState {
-  final List<SueModel> sueModelList;
+  final List<EventModel> eventModelList;
   final String message;
   final bool isError;
-  final int sueMade;
-  final int sueApproved;
+  final int eventMade;
+  final int eventApproved;
   final String dni;
   final String name;
   final String lastname;
@@ -18,11 +18,11 @@ class ProfileState {
   final bool isLoading;
 
   ProfileState(
-      {this.sueModelList = const [],
+      {this.eventModelList = const [],
       this.message = "No hay delitos registrados",
       this.isError = false,
-      this.sueMade = 0,
-      this.sueApproved = 0,
+      this.eventMade = 0,
+      this.eventApproved = 0,
       this.dni = '',
       this.name = '',
       this.lastname = '',

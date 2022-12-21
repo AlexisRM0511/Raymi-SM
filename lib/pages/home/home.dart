@@ -7,8 +7,8 @@ import '/pages/home/widgets/dialog_confirm.dart';
 import '/pages/home/widgets/image_logo.dart';
 import '/pages/home/widgets/input_search.dart';
 import '/pages/home/widgets/spinner_loading.dart';
-import '/pages/home/widgets/sue_info.dart';
-import '/pages/home/widgets/sue_list.dart';
+import '/pages/home/widgets/event_info.dart';
+import '/pages/home/widgets/event_list.dart';
 import '/pages/home/widgets/text_info.dart';
 
 class Home extends StatefulWidget {
@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<HomeBloc>(context).add(ReloadSuesEvent());
+    BlocProvider.of<HomeBloc>(context).add(ReloadEventsEvent());
     BlocProvider.of<HomeBloc>(context).add(SharedPreferencesEvent());
   }
 
@@ -68,19 +68,19 @@ class _HomeState extends State<Home> {
                                 icon:
                                     const Icon(Icons.pending_actions_outlined),
                                 onPressed: () =>
-                                    homeBloc.add(GoSueEvent(context: context))),
+                                    homeBloc.add(GoEventEvent(context: context))),
                             const TextInfo(
                                 text: "¿Deseas ver las estadísticas?"),
                             ButtonStatistics(
                                 text: "Ver Estadísticas",
                                 onPressed: () =>
                                     homeBloc.add(GoStatisticsEvent())),
-                            SueInfo(
+                            EventInfo(
                                 text: "Denuncias Realizadas",
                                 onPressed: () =>
-                                    homeBloc.add(ReloadSuesEvent())),
-                            SueList(
-                                sueModelList: state.sueModelList,
+                                    homeBloc.add(ReloadEventsEvent())),
+                            EventList(
+                                eventModelList: state.eventModelList,
                                 message: state.message,
                                 isError: state.isError,
                                 isLoading: state.isLoading),
