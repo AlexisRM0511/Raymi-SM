@@ -1,5 +1,15 @@
 class Constants {
-  /// --> Errors <-- ///
+  //
+  /* ----------- */
+  /* Collections */
+  /* ----------- */
+
+  static const String collectionUsers = "Users";
+  static const String collectionEvents = "Events";
+
+  /* ------ */
+  /* Errors */
+  /* ------ */
 
   // Errors Register
   static const String passwordWeak = 'La contraseña es muy débil.';

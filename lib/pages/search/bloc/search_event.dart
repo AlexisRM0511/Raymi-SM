@@ -3,9 +3,9 @@ part of 'search_bloc.dart';
 @immutable
 abstract class SearchEvent {}
 
-class SearchSuesEvent extends SearchEvent {
+class SearchEventsEvent extends SearchEvent {
   final String search;
-  SearchSuesEvent({required this.search});
+  SearchEventsEvent({required this.search});
 }
 
 class LeadingIconButtonPressedEvent extends SearchEvent {
@@ -13,9 +13,9 @@ class LeadingIconButtonPressedEvent extends SearchEvent {
   LeadingIconButtonPressedEvent({required this.context});
 }
 
-class GoSueDetailEvent extends SearchEvent {
+class GoEventDetailEvent extends SearchEvent {
   final BuildContext context;
-  final SueModel sue;
+  final EventModel event;
 
-  GoSueDetailEvent({required this.context, required this.sue});
+  GoEventDetailEvent({required this.context, required this.event});
 }

@@ -161,7 +161,7 @@ class UserService implements UserRepository {
   }
 
   @override
-  Future<UserModel?> getUserByIdFirebase(String idFirebase) async {
+  Future<UserModel?> getUserById(String idFirebase) async {
     Uri url = Uri.parse('$apiUrl/idFirebase/$idFirebase');
     ResponseData responseData =
         ResponseData.fromJson(json.decode((await https.get(url)).body));

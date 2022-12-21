@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '/rest_services/sues/sue_controller.dart';
-import '/rest_services/sues/sue_model.dart';
-import '/rest_services/sues/sue_service.dart';
+import '/rest_services/events/event_controller.dart';
+import '/rest_services/events/event_model.dart';
+import '/rest_services/events/event_service.dart';
 import '/rest_services/users/user_controller.dart';
 import '/rest_services/users/user_model.dart';
 import '/rest_services/users/user_service.dart';
@@ -16,7 +16,7 @@ part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  final SueController _sueController = SueController(SueService());
+  final EventController _eventController = EventController(EventService());
   final UserController _userController = UserController(UserService());
 
   ProfileBloc() : super(ProfileState(isLoading: true)) {
@@ -27,7 +27,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
     if (event is LeadingIconButtonPressedEvent) {
       yield ProfileState(
-          sueModelList: const [],
+          eventModelList: const [],
           dni: '',
           name: '',
           lastname: '',
@@ -47,10 +47,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       Navigator.pushNamed(event.context, '/profile_edit');
     }
 
-    if (event is GoSueDetailEvent) {
-      Navigator.pushNamed(event.context, '/sue_detail',arguments: event.sue);
+    if (event is GoEventDetailEvent) {
+      Navigator.pushNamed(event.context, '/event_detail',arguments: event.event);
       Fluttertoast.showToast(
-          msg: 'Denunciar ${event.sue.title}',
+          msg: 'Denunciar ${event.event.title}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -64,21 +64,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       if (sharedPreferences.containsKey('idFirebase')) {
-        UserModel? user = await _userController.getUserByIdFirebase(
+        UserModel? user = await _userController.getUserById(
             sharedPreferences.getString('idFirebase').toString());
         if (user != null) {
-          List<SueModel>? sueList =
-              await _sueController.getSuesByUser(user.id.toString());
+          List<EventModel>? eventList =
+              await _eventController.getEventsByUser(user.id.toString());
 
-          if (sueList != null) {
-            if (sueList.isNotEmpty) {
+          if (eventList != null) {
+            if (eventList.isNotEmpty) {
               yield ProfileState(
-                  sueModelList: sueList,
-                  sueMade: sueList
-                      .where((sue) => sue.user?.split("|")[1] == user.id)
+                  eventModelList: eventList,
+                  eventMade: eventList
+                      .where((event) => event.user?.split("|")[1] == user.id)
                       .length,
-                  sueApproved: sueList
-                      .where((sue) => sue.user == user.id || sue.status == 1)
+                  eventApproved: eventList
+                      .where((event) => event.user == user.id || event.status == 1)
                       .length,
                   dni: user.dni.toString(),
                   name: user.name.toString(),
@@ -92,9 +92,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
                   isLoading: false);
             } else {
               yield ProfileState(
-                  sueModelList: const [],
-                  sueMade: 0,
-                  sueApproved: 0,
+                  eventModelList: const [],
+                  eventMade: 0,
+                  eventApproved: 0,
                   dni: user.dni.toString(),
                   name: user.name.toString(),
                   lastname: user.lastname.toString(),
@@ -108,9 +108,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             }
           } else {
             yield ProfileState(
-                sueModelList: const [],
-                sueMade: 0,
-                sueApproved: 0,
+                eventModelList: const [],
+                eventMade: 0,
+                eventApproved: 0,
                 dni: user.dni.toString(),
                 name: user.name.toString(),
                 lastname: user.lastname.toString(),

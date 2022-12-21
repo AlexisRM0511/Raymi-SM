@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/pages/search/bloc/search_bloc.dart';
 import '/pages/search/widgets/app_bar.dart';
 import '/pages/search/widgets/input_search.dart';
-import '/pages/search/widgets/sue_list.dart';
+import '/pages/search/widgets/event_list.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -38,10 +38,10 @@ class _SearchPageState extends State<Search> {
                               hint: "Buscar",
                               controller: _searchController,
                               onPressed: () => searchBloc.add(
-                                  SearchSuesEvent(search: _searchController.text))),
+                                  SearchEventsEvent(search: _searchController.text))),
                           const SizedBox(height: 10.0),
-                          SueList(
-                              sueModelList: state.sueModelList,
+                          EventList(
+                              eventModelList: state.eventModelList,
                               message: state.message,
                               isError: state.isError,
                               isLoading: state.isLoading)

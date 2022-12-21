@@ -85,7 +85,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         }
         if (user != null) {
           UserModel? userModel =
-              await _userController.getUserByIdFirebase(user.user!.uid);
+              await _userController.getUserById(user.user!.uid);
           if (userModel != null) {
             Fluttertoast.showToast(
                 msg: "Bienvenido ${userModel.username}",

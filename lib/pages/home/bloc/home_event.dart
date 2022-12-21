@@ -21,21 +21,21 @@ class GoSearchEvent extends HomeEvent {
   GoSearchEvent({required this.context});
 }
 
-class GoSueEvent extends HomeEvent {
+class GoEventEvent extends HomeEvent {
   final BuildContext context;
 
-  GoSueEvent({required this.context});
+  GoEventEvent({required this.context});
 }
 
 class GoStatisticsEvent extends HomeEvent {}
 
-class GoSueDetailEvent extends HomeEvent {
+class GoEventDetailEvent extends HomeEvent {
   final BuildContext context;
-  final SueModel sue;
+  final EventModel event;
 
-  GoSueDetailEvent({required this.context, required this.sue});
+  GoEventDetailEvent({required this.context, required this.event});
 }
 
-class ReloadSuesEvent extends HomeEvent {}
+class ReloadEventsEvent extends HomeEvent {}
 
 class SharedPreferencesEvent extends HomeEvent {}

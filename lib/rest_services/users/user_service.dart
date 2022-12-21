@@ -12,48 +12,13 @@ import '/rest_services/users/user_repository.dart';
 
 class UserService implements UserRepository {
   final String apiUrl = "https://limachay.herokuapp.com/users";
-
-  @override
-  Future<List<UserModel>?> getUsers() async {
-    Uri url = Uri.parse('$apiUrl/all');
-    ResponseData responseData =
-        ResponseData.fromJson(json.decode((await https.get(url)).body));
-    if (responseData.status == 200) {
-      List<UserModel> users = (responseData.data as List)
-          .map((user) => UserModel.fromJson(user))
-          .toList();
-      return users;
-    } else {
-      Fluttertoast.showToast(
-          msg: responseData.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      return null;
-    }
-  }
+  final CollectionReference collectionUsers =
+      FirebaseFirestore.instance.collection(Constants.collectionUsers);
 
   @override
   Future<UserModel?> getUserById(String id) async {
-    Uri url = Uri.parse('$apiUrl/$id');
-    ResponseData responseData =
-        ResponseData.fromJson(json.decode((await https.get(url)).body));
-    if (responseData.status == 200) {
-      return UserModel.fromJson(responseData.data);
-    } else {
-      Fluttertoast.showToast(
-          msg: responseData.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      return null;
-    }
+    UserModel userModel = collectionUsers.doc(id).get() as UserModel;
+    return userModel;
   }
 
   @override
@@ -65,10 +30,8 @@ class UserService implements UserRepository {
 
       if (userCredential.user != null) {
         user.id = userCredential.user!.uid;
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(userCredential.user!.uid)
-            .set(user.toJson());
+        user.createdAt = DateTime.now();
+        await collectionUsers.doc(userCredential.user!.uid).set(user.toJson());
         return user;
       } else {
         Utils.alertError(Constants.errorCreatingUser);
@@ -120,78 +83,6 @@ class UserService implements UserRepository {
         ResponseData.fromJson(json.decode((await https.delete(url)).body));
     if (responseData.status == 200) {
       return "Usuario eliminado correctamente";
-    } else {
-      Fluttertoast.showToast(
-          msg: responseData.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      return null;
-    }
-  }
-
-  @override
-  Future<UserModel?> getUserByDni(String dni) async {
-    Uri url = Uri.parse('$apiUrl/dni/$dni');
-    ResponseData responseData =
-        ResponseData.fromJson(json.decode((await https.get(url)).body));
-    if (responseData.status == 200) {
-      if (responseData.data.length > 0) {
-        return UserModel.fromJson(responseData.data[0]);
-      } else {
-        return null;
-      }
-    } else {
-      Fluttertoast.showToast(
-          msg: responseData.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      return null;
-    }
-  }
-
-  @override
-  Future<UserModel?> getUserByEmail(String email) async {
-    Uri url = Uri.parse('$apiUrl/email/$email');
-    ResponseData responseData =
-        ResponseData.fromJson(json.decode((await https.get(url)).body));
-    if (responseData.status == 200) {
-      if (responseData.data.length > 0) {
-        return UserModel.fromJson(responseData.data[0]);
-      } else {
-        return null;
-      }
-    } else {
-      Fluttertoast.showToast(
-          msg: responseData.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      return null;
-    }
-  }
-
-  @override
-  Future<UserModel?> getUserByIdFirebase(String idFirebase) async {
-    Uri url = Uri.parse('$apiUrl/idFirebase/$idFirebase');
-    ResponseData responseData =
-        ResponseData.fromJson(json.decode((await https.get(url)).body));
-    if (responseData.status == 200) {
-      if (responseData.data.length > 0) {
-        return UserModel.fromJson(responseData.data[0]);
-      } else {
-        return null;
-      }
     } else {
       Fluttertoast.showToast(
           msg: responseData.message.toString(),

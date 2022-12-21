@@ -1,7 +1,7 @@
 part of 'home_bloc.dart';
 
 class HomeState {
-  final List<SueModel> sueModelList;
+  final List<EventModel> eventModelList;
   final String message;
   final bool isError;
   final bool isLoading;
@@ -9,11 +9,11 @@ class HomeState {
   HomeState(
       {this.message = "No hay delitos registrados",
       this.isError = false,
-      this.sueModelList = const [],
+      this.eventModelList = const [],
       this.isLoading = false});
 
   @override
   String toString() {
-    return 'HomeState{sueModelList: $sueModelList, message: $message, isError: $isError, isLoading: $isLoading}';
+    return 'HomeState{eventModelList: $eventModelList, message: $message, isError: $isError, isLoading: $isLoading}';
   }
 }

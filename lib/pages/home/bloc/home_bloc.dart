@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '/rest_services/sues/sue_controller.dart';
-import '/rest_services/sues/sue_model.dart';
-import '/rest_services/sues/sue_service.dart';
+import '/rest_services/events/event_controller.dart';
+import '/rest_services/events/event_model.dart';
+import '/rest_services/events/event_service.dart';
 import '/rest_services/users/user_controller.dart';
 import '/rest_services/users/user_model.dart';
 import '/rest_services/users/user_service.dart';
@@ -17,7 +17,7 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final SueController _sueController = SueController(SueService());
+  final EventController _eventController = EventController(EventService());
 
   HomeBloc() : super(HomeState(isLoading: true)) {
     add(SharedPreferencesEvent());
@@ -38,14 +38,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       Navigator.pushNamed(event.context, '/search');
     }
 
-    if (event is GoSueEvent) {
-      Navigator.pushNamed(event.context, '/sue');
+    if (event is GoEventEvent) {
+      Navigator.pushNamed(event.context, '/event');
     }
 
-    if (event is GoSueDetailEvent) {
-      Navigator.pushNamed(event.context, '/sue_detail', arguments: event.sue);
+    if (event is GoEventDetailEvent) {
+      Navigator.pushNamed(event.context, '/event_detail', arguments: event.event);
       Fluttertoast.showToast(
-          msg: 'Denunciar ${event.sue.title}',
+          msg: 'Denunciar ${event.event.title}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -79,7 +79,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         if (user != null) {
           prefs.setString('idFirebase', user.uid);
           UserModel? userModel =
-              await UserController(UserService()).getUserByIdFirebase(user.uid);
+              await UserController(UserService()).getUserById(user.uid);
           if (userModel != null) {
             prefs.setString('idUser', userModel.id.toString());
           }
@@ -87,29 +87,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       });
     }
 
-    if (event is ReloadSuesEvent) {
+    if (event is ReloadEventsEvent) {
       yield HomeState(isLoading: true);
-      List<SueModel>? sueList = await _sueController.getSues();
-      if (sueList != null) {
-        if (sueList.isNotEmpty) {
+      List<EventModel>? eventList = await _eventController.getEvents();
+      if (eventList != null) {
+        if (eventList.isNotEmpty) {
           yield HomeState(
               isLoading: false,
               isError: false,
               message: "",
-              sueModelList: sueList);
+              eventModelList: eventList);
         } else {
           yield HomeState(
               isLoading: false,
               isError: false,
               message: "No se encontraron Delitos",
-              sueModelList: const []);
+              eventModelList: const []);
         }
       } else {
         yield HomeState(
             isLoading: false,
             isError: true,
             message: "Registro devuelve Null",
-            sueModelList: const []);
+            eventModelList: const []);
       }
     }
   }

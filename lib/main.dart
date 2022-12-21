@@ -16,12 +16,12 @@ import '/pages/profile/profile.dart';
 import '/pages/profile/bloc/profile_bloc.dart';
 import '/pages/profile_edit/profile_edit.dart';
 import '/pages/profile_edit/bloc/profile_edit_bloc.dart';
-import '/pages/sue/sue.dart';
-import '/pages/sue/bloc/sue_bloc.dart';
-import '/pages/sue_detail/bloc/sue_detail_bloc.dart';
-import '/pages/sue_detail/sue_detail.dart';
-import '/pages/sue_edit/bloc/sue_edit_bloc.dart';
-import '/pages/sue_edit/sue_edit.dart';
+import '/pages/event/event.dart';
+import '/pages/event/bloc/event_bloc.dart';
+import '/pages/event_detail/bloc/event_detail_bloc.dart';
+import '/pages/event_detail/event_detail.dart';
+import '/pages/event_edit/bloc/event_edit_bloc.dart';
+import '/pages/event_edit/event_edit.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,11 +39,11 @@ class AppState extends StatelessWidget {
       BlocProvider<SignUpBloc>(create: (context) => SignUpBloc()),
       BlocProvider<HomeBloc>(create: (context) => HomeBloc()),
       BlocProvider<SearchBloc>(create: (context) => SearchBloc()),
-      BlocProvider<SueBloc>(create: (context) => SueBloc()),
+      BlocProvider<EventBloc>(create: (context) => EventBloc()),
       BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
       BlocProvider<ProfileEditBloc>(create: (context) => ProfileEditBloc()),
-      BlocProvider<SueDetailBloc>(create: (context) => SueDetailBloc()),
-      BlocProvider<SueEditBloc>(create: (context) => SueEditBloc())
+      BlocProvider<EventDetailBloc>(create: (context) => EventDetailBloc()),
+      BlocProvider<EventEditBloc>(create: (context) => EventEditBloc())
     ], child: const MyApp());
   }
 }
@@ -69,20 +69,20 @@ class MyApp extends StatelessWidget {
           '/search': (context) => BlocProvider.value(
               value: BlocProvider.of<SearchBloc>(context),
               child: const Search()),
-          '/sue': (context) => BlocProvider.value(
-              value: BlocProvider.of<SueBloc>(context), child: const Sue()),
+          '/event': (context) => BlocProvider.value(
+              value: BlocProvider.of<EventBloc>(context), child: const Event()),
           '/profile': (context) => BlocProvider.value(
               value: BlocProvider.of<ProfileBloc>(context),
               child: const Profile()),
           '/profile_edit': (context) => BlocProvider.value(
               value: BlocProvider.of<ProfileEditBloc>(context),
               child: const ProfileEdit()),
-          '/sue_detail': (context) => BlocProvider.value(
-              value: BlocProvider.of<SueDetailBloc>(context),
-              child: const SueDetail()),
-          '/sue_edit': (context) => BlocProvider.value(
-              value: BlocProvider.of<SueEditBloc>(context),
-              child: const SueEdit())
+          '/event_detail': (context) => BlocProvider.value(
+              value: BlocProvider.of<EventDetailBloc>(context),
+              child: const EventDetail()),
+          '/event_edit': (context) => BlocProvider.value(
+              value: BlocProvider.of<EventEditBloc>(context),
+              child: const EventEdit())
         });
   }
 }

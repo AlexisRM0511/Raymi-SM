@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '/rest_services/sues/sue_controller.dart';
-import '/rest_services/sues/sue_model.dart';
-import '/rest_services/sues/sue_service.dart';
+import '/rest_services/events/event_controller.dart';
+import '/rest_services/events/event_model.dart';
+import '/rest_services/events/event_service.dart';
 
 part 'search_event.dart';
 
@@ -13,7 +13,7 @@ part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchBloc() : super(SearchState());
-  final SueController _sueController = SueController(SueService());
+  final EventController _eventController = EventController(EventService());
 
   @override
   Stream<SearchState> mapEventToState(SearchEvent event) async* {
@@ -22,14 +22,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           isLoading: false,
           isError: false,
           message: "Escriba el título del delito a buscar",
-          sueModelList: const []);
+          eventModelList: const []);
       Navigator.pop(event.context);
     }
 
-    if (event is GoSueDetailEvent) {
-      Navigator.pushNamed(event.context, '/sue_detail',arguments: event.sue);
+    if (event is GoEventDetailEvent) {
+      Navigator.pushNamed(event.context, '/event_detail',arguments: event.event);
       Fluttertoast.showToast(
-          msg: 'Denunciar ${event.sue.title}',
+          msg: 'Denunciar ${event.event.title}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -38,7 +38,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           fontSize: 16.0);
     }
 
-    if (event is SearchSuesEvent) {
+    if (event is SearchEventsEvent) {
       if (event.search.isEmpty) {
         Fluttertoast.showToast(
             msg: "Ingrese un título para buscar",
@@ -50,28 +50,28 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             fontSize: 16.0);
       } else {
         yield SearchState(isLoading: true);
-        List<SueModel>? sues =
-            await _sueController.getSuesByTitle(event.search);
-        if (sues != null) {
-          if (sues.isNotEmpty) {
+        List<EventModel>? events =
+            await _eventController.getEventsByTitle(event.search);
+        if (events != null) {
+          if (events.isNotEmpty) {
             yield SearchState(
                 isLoading: false,
                 isError: false,
                 message: "",
-                sueModelList: sues);
+                eventModelList: events);
           } else {
             yield SearchState(
                 isLoading: false,
                 isError: false,
                 message: "No se encontraron Delitos",
-                sueModelList: const []);
+                eventModelList: const []);
           }
         } else {
           yield SearchState(
               isLoading: false,
               isError: true,
               message: "Registro devuelve Null",
-              sueModelList: const []);
+              eventModelList: const []);
         }
       }
     }
