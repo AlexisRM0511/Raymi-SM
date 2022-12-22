@@ -1,35 +1,28 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as https;
+import 'package:raymism/shared/constants.dart';
 import '/rest_services/response_data.dart';
 import '/rest_services/events/event_model.dart';
 import '/rest_services/events/event_repository.dart';
 
 class EventService implements EventRepository {
   final String apiUrl = "https://limachay.herokuapp.com/event";
+  final CollectionReference collectionEvents =
+  FirebaseFirestore.instance.collection(Constants.collectionEvents);
 
   @override
   Future<List<EventModel>?> getEvents() async {
-    Uri url = Uri.parse('$apiUrl/all');
-    ResponseData responseData =
-        ResponseData.fromJson(json.decode((await https.get(url)).body));
-    if (responseData.status == 200) {
-      List<EventModel> events = (responseData.data as List)
-          .map((event) => EventModel.fromJson(event))
-          .toList();
-      return events;
-    } else {
-      Fluttertoast.showToast(
-          msg: responseData.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      return null;
-    }
+    List<EventModel> events = [];
+    await collectionEvents.get().then((querySnapshot) {
+      for (var result in querySnapshot.docs) {
+        print(result.data().toString());
+        // events.add(EventModel.fromJson(result.data()));
+      }
+    });
+
   }
 
   @override

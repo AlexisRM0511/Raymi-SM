@@ -37,5 +37,3 @@ class GoEventDetailEvent extends HomeEvent {
 }
 
 class ReloadEventsEvent extends HomeEvent {}
-
-class SharedPreferencesEvent extends HomeEvent {}

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:raymism/shared/colors.dart';
 import '/pages/sign_in/bloc/sign_in_bloc.dart';
-import '/pages/sign_in/widgets/button_form.dart';
-import '/pages/sign_in/widgets/image_logo.dart';
+import '../../components/button.dart';
+import '../../components/image_logo.dart';
 import '/pages/sign_in/widgets/input_email_form.dart';
 import '/pages/sign_in/widgets/input_password_form.dart';
-import '/pages/sign_in/widgets/spinner_loading.dart';
+import '../../components/spinner_loading.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -36,25 +37,23 @@ class _SignInState extends State<SignIn> {
               child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Color(0xFF36A32C), Color(0xC248ED39)])),
+                  color: CustomColor.backgroundColor,
                   child: Form(
                       key: _formSignInKey,
                       child: SingleChildScrollView(
                           padding:
                               const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Column(children: [
-                            const ImageLogo(),
+                            const ImageLogo(width: 0.5, height: 0.5),
                             InputEmailForm(
                                 text: 'Correo Electrónico',
                                 textController: _emailController),
                             InputPasswordForm(
                                 text: 'Contraseña',
                                 textController: _passwordController),
-                            ButtonForm(
+                            Button(
+                                buttonColor: CustomColor.primaryColor,
+                                textColor: CustomColor.white,
                                 text: 'Iniciar Sesión',
                                 onPressed: () => signInBloc.add(
                                     SignInButtonPressedEvent(
@@ -69,7 +68,9 @@ class _SignInState extends State<SignIn> {
                             SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height * 0.01),
-                            ButtonForm(
+                            Button(
+                                buttonColor: CustomColor.white,
+                                textColor: CustomColor.black,
                                 text: 'Registrarte',
                                 onPressed: () => signInBloc
                                     .add(GoSignUpEvent(context: context))),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:raymism/shared/colors.dart';
 
 class SpinnerLoading extends StatefulWidget {
   final bool isLoading;
@@ -16,7 +17,7 @@ class _SpinnerLoadingState extends State<SpinnerLoading> {
     return Visibility(
       visible: widget.isLoading,
         child: Container(
-            color: Colors.black.withOpacity(0.5),
+            color: CustomColor.black2,
             child: SpinKitWave(
                 size: 40.0,
                 itemBuilder: (BuildContext context, int index) {
@@ -24,8 +25,8 @@ class _SpinnerLoadingState extends State<SpinnerLoading> {
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: index.isEven
-                              ? const Color(0xFFEFEFEF)
-                              : const Color(0xFF36A32C)));
+                              ? CustomColor.white
+                              : CustomColor.primaryColor));
                 })));
   }
 }

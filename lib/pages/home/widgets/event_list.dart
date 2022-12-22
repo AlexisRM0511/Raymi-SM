@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:raymism/shared/colors.dart';
 import '/pages/home/bloc/home_bloc.dart';
 import '/rest_services/events/event_model.dart';
 
@@ -60,7 +61,8 @@ class _EventListState extends State<EventList> {
                       margin: const EdgeInsets.only(left: 10.0, right: 10.0),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
-                          border: Border.all(color: Colors.black, width: 2.0)),
+                          border:
+                              Border.all(color: CustomColor.black, width: 2.0)),
                       child: Row(children: [
                         ClipRRect(
                             borderRadius: const BorderRadius.only(

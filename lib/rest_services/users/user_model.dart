@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModel {
   String? id;
   String? dni;
@@ -9,8 +11,7 @@ class UserModel {
   String? password;
   int? typeUser;
   int? status;
-  DateTime? createdAt;
-
+  Timestamp? createdAt;
   UserModel(
       {this.id,
       this.dni,
@@ -35,7 +36,7 @@ class UserModel {
       password: json["password"] as String,
       typeUser: json["typeUser"] as int,
       status: json["status"] as int,
-      createdAt: DateTime.parse(json["createdAt"] as String));
+      createdAt: json["createdAt"] as Timestamp);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -47,9 +48,9 @@ class UserModel {
     if (email != null) data['email'] = email;
     if (phone != null) data['phone'] = phone;
     if (password != null) data['password'] = password;
-    if (typeUser != null) data['typeUser'] = typeUser.toString();
-    if (status != null) data['status'] = status.toString();
-    if (createdAt != null) data['createdAt'] = createdAt.toString();
+    if (typeUser != null) data['typeUser'] = typeUser;
+    if (status != null) data['status'] = status;
+    if (createdAt != null) data['createdAt'] = createdAt;
     return data;
   }
 

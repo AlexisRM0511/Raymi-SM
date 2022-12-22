@@ -41,7 +41,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
               username: event.username,
               email: event.email,
               phone: event.phone,
-              password: DBCrypt().hashpw(event.password, DBCrypt().gensalt()),
+              password: event.password,
               status: 1,
               typeUser: 0));
           if (user != null) {

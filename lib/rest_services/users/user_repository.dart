@@ -9,4 +9,6 @@ abstract class UserRepository {
   Future<String?> updateUser(UserModel user);
 
   Future<String?> deleteUser(String id);
+
+  Future<UserModel?> signIn(String email, String password);
 }

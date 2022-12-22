@@ -6,6 +6,10 @@ class UserController {
 
   UserController(this._userRepository);
 
+  Future<UserModel?> signIn(String email, String password) async =>
+    _userRepository.signIn(email, password);
+
+
   Future<UserModel?> getUserById(String id) async =>
       _userRepository.getUserById(id);
 

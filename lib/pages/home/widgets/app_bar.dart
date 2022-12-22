@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:raymism/shared/colors.dart';
+import 'package:raymism/shared/constants.dart';
 
 class AppBarHome extends StatelessWidget with PreferredSizeWidget {
   final Function signOutOnPressed;
@@ -14,19 +16,19 @@ class AppBarHome extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         automaticallyImplyLeading: false,
-        title:
-            const Text('Limachay', style: TextStyle(color: Color(0xFFEFEFEF))),
-        backgroundColor: const Color(0xFF36A32C),
+        title: const Text(Constants.appName,
+            style: TextStyle(color: CustomColor.white)),
+        backgroundColor: CustomColor.primaryColor,
         leading: Container(
             alignment: Alignment.center,
-            child: Image.asset('assets/icon/logo.png',
+            child: Image.asset(Constants.pathLogo,
                 width: 40, height: 40, fit: BoxFit.cover)),
         actions: [
           IconButton(
-              icon: const Icon(Icons.account_circle, color: Color(0xFFEFEFEF)),
+              icon: const Icon(Icons.account_circle, color: CustomColor.white),
               onPressed: () => profileOnPressed()),
           IconButton(
-              icon: const Icon(Icons.exit_to_app, color: Color(0xFFEFEFEF)),
+              icon: const Icon(Icons.exit_to_app, color: CustomColor.white),
               onPressed: () => showDialog(
                   context: context,
                   builder: (context) {
