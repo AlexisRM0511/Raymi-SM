@@ -11,7 +11,7 @@ class EventController {
   Future<EventModel?> getEventById(String id) async =>
       _eventRepository.getEventById(id);
 
-  Future<EventModel?> createEvent(EventModel event) async =>
+  Future<void> createEvent(EventModel event) async =>
       _eventRepository.createEvent(event);
 
   Future<String?> updateEvent(EventModel event) async =>

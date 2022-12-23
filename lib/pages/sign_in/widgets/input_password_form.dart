@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:raymism/shared/colors.dart';
+import 'package:raymism/shared/constants.dart';
 
 class InputPasswordForm extends StatefulWidget {
   final String text;
@@ -42,18 +44,18 @@ class _InputPasswordFormState extends State<InputPasswordForm> {
                 controller: textController,
                 obscureText: _passwordInVisible,
                 obscuringCharacter: '*',
-                style: const TextStyle(color: Colors.black),
+                style: const TextStyle(color: CustomColor.black),
                 decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: CustomColor.white,
                     hintText: text,
                     contentPadding: const EdgeInsets.only(left: 14.0),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: CustomColor.white),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: CustomColor.white),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     suffixIcon: IconButton(
@@ -72,7 +74,7 @@ class _InputPasswordFormState extends State<InputPasswordForm> {
                     )),
                 validator: (value) {
                   if (value.toString().isEmpty) {
-                    return 'Ingrese una contraseña válida';
+                    return Constants.invalidPassword;
                   }
                   return null;
                 })));

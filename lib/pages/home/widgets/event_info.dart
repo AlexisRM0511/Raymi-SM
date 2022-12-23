@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raymism/shared/styles.dart';
 
 class EventInfo extends StatelessWidget {
   final String text;
@@ -9,16 +10,11 @@ class EventInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle style = const TextStyle(
-        fontSize: 16.0,
-        fontWeight: FontWeight.bold,
-        fontStyle: FontStyle.italic);
-
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.only(left: 30.0),
-          child: Text(text, style: style)),
+          child: Text(text, style: Styles.textStyle(16.0))),
       Container(
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.only(right: 20.0),

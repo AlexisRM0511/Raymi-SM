@@ -7,10 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '/rest_services/events/event_controller.dart';
 import '/rest_services/events/event_model.dart';
 import '/rest_services/events/event_service.dart';
-import '/rest_services/users/user_controller.dart';
-import '/rest_services/users/user_model.dart';
-import '/rest_services/users/user_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 part 'home_event.dart';
@@ -19,9 +15,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final EventController _eventController = EventController(EventService());
 
-  HomeBloc() : super(HomeState(isLoading: true)) {
-    add(SharedPreferencesEvent());
-  }
+  HomeBloc() : super(HomeState(isLoading: true));
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
@@ -71,20 +65,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             textColor: Colors.white,
             fontSize: 16.0);
       }
-    }
-
-    if (event is SharedPreferencesEvent) {
-      SharedPreferences.getInstance().then((prefs) async {
-        User? user = FirebaseAuth.instance.currentUser;
-        if (user != null) {
-          prefs.setString('idFirebase', user.uid);
-          UserModel? userModel =
-              await UserController(UserService()).getUserById(user.uid);
-          if (userModel != null) {
-            prefs.setString('idUser', userModel.id.toString());
-          }
-        }
-      });
     }
 
     if (event is ReloadEventsEvent) {

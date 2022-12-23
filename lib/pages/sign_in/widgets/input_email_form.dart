@@ -1,4 +1,6 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:raymism/shared/colors.dart';
+import 'package:raymism/shared/constants.dart';
 
 class InputEmailForm extends StatelessWidget {
   final String text;
@@ -12,8 +14,7 @@ class InputEmailForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final regexEmail = RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    final regexEmail = RegExp(Constants.reggexEmail);
 
     return Center(
         child: SizedBox(
@@ -22,25 +23,25 @@ class InputEmailForm extends StatelessWidget {
             child: TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: textController,
-                style: const TextStyle(color: Colors.black),
+                style: const TextStyle(color: CustomColor.black),
                 decoration: InputDecoration(
                     alignLabelWithHint: true,
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: CustomColor.white,
                     hintText: text,
                     contentPadding: const EdgeInsets.only(left: 14.0),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: CustomColor.white),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: CustomColor.white),
                       borderRadius: BorderRadius.circular(10.0),
                     )),
                 validator: (value) {
                   if (!regexEmail.hasMatch(value.toString()) ||
                       value.toString().isEmpty) {
-                    return 'Por favor ingrese un correo válido';
+                    return Constants.invalidEmail;
                   }
                   return null;
                 })));

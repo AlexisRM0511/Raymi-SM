@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:raymism/components/button.dart';
+import 'package:raymism/components/image_logo.dart';
+import 'package:raymism/components/spinner_loading.dart';
+import 'package:raymism/components/label.dart';
+import 'package:raymism/shared/colors.dart';
 import '/pages/home/bloc/home_bloc.dart';
 import '/pages/home/widgets/app_bar.dart';
-import '/pages/home/widgets/button_statistics.dart';
 import '/pages/home/widgets/dialog_confirm.dart';
-import '/pages/home/widgets/image_logo.dart';
-import '/pages/home/widgets/input_search.dart';
-import '/pages/home/widgets/spinner_loading.dart';
+import '/pages/home/widgets/input_redirect.dart';
 import '/pages/home/widgets/event_info.dart';
 import '/pages/home/widgets/event_list.dart';
-import '/pages/home/widgets/text_info.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -23,7 +24,6 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     BlocProvider.of<HomeBloc>(context).add(ReloadEventsEvent());
-    BlocProvider.of<HomeBloc>(context).add(SharedPreferencesEvent());
   }
 
   @override
@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
                   child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
-                      decoration: const BoxDecoration(color: Color(0xFFEFEFEF)),
+                      color: CustomColor.backgroundColor,
                       child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           padding:
@@ -60,23 +60,25 @@ class _HomeState extends State<Home> {
                                 icon: const Icon(Icons.search),
                                 onPressed: () => homeBloc
                                     .add(GoSearchEvent(context: context))),
-                            const ImageLogo(),
-                            const TextInfo(
-                                text: "¿Has presenciado algún delito?"),
+                            const ImageLogo(width: 0.5, height: 0.3),
+                            const Label(
+                                text: "¿Deseas registrar algún evento?"),
                             InputRedirect(
-                                hint: "Denunciar",
+                                hint: "Registrar evento",
                                 icon:
                                     const Icon(Icons.pending_actions_outlined),
                                 onPressed: () =>
                                     homeBloc.add(GoEventEvent(context: context))),
-                            const TextInfo(
-                                text: "¿Deseas ver las estadísticas?"),
-                            ButtonStatistics(
-                                text: "Ver Estadísticas",
+                            const Label(
+                                text: "¿Te perdiste? Te ayudamos a ubicarte"),
+                            Button(
+                                buttonColor: CustomColor.primaryColor,
+                                textColor: CustomColor.white,
+                                text: "Ver Mapa",
                                 onPressed: () =>
                                     homeBloc.add(GoStatisticsEvent())),
                             EventInfo(
-                                text: "Denuncias Realizadas",
+                                text: "Eventos Registrados",
                                 onPressed: () =>
                                     homeBloc.add(ReloadEventsEvent())),
                             EventList(

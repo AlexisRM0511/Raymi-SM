@@ -80,7 +80,6 @@ class EventEditBloc extends Bloc<EventEditEvent, EventEditState> {
         location: state.location,
         photo: link,
         status: state.status,
-        isKnown: state.isKnown,
       ));
       if (messageConfirm != null) {
         Fluttertoast.showToast(
