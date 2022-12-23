@@ -1,10 +1,16 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
+
 class Styles {
-  static textStyle() {
+  static textStyle(double size) {
     return TextStyle(
-        fontSize: 16.0,
+        fontSize: size,
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic);
+  }
+
+  static background() {
+    return const BoxDecoration(color: Color(0xFFEFEFEF));
   }
 }

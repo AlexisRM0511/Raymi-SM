@@ -40,7 +40,6 @@ class _EventState extends State<EventEdit> {
     _dateAndTimeController.text = params.dateAndTime ?? '';
     _locationController.text = params.location ?? '';
     _photoController.text = params.photo ?? '';
-    _checkboxController.text = params.isKnown.toString();
 
     return Scaffold(
         appBar: AppBarEventEdit(

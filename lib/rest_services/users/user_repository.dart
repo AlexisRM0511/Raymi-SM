@@ -6,9 +6,9 @@ abstract class UserRepository {
 
   Future<UserModel?> createUser(UserModel user);
 
-  Future<String?> updateUser(UserModel user);
+  Future<void> updateUser(UserModel user);
 
-  Future<String?> deleteUser(String id);
+  Future<void> deleteUser(String id);
 
   Future<UserModel?> signIn(String email, String password);
 }

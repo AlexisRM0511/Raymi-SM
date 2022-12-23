@@ -128,7 +128,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
             UserModel? user = await _userController.getUserById(
                 sharedPreferences.getString('idFirebase').toString());
             if (user != null) {
-              String? messageUserUpdate = await _userController.updateUser(
+              await _userController.updateUser(
                   UserModel(
                       id: user.id,
                       dni: event.dni,
@@ -141,50 +141,6 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
                           ? DBCrypt()
                               .hashpw(event.password, DBCrypt().gensalt())
                           : state.password));
-              if (messageUserUpdate != null) {
-                yield ProfileEditState(
-                    dni: event.dni,
-                    name: event.name,
-                    lastname: event.lastname,
-                    username: event.username,
-                    email: event.email,
-                    phone: event.phone,
-                    password: event.password,
-                    typeUser: state.typeUser,
-                    status: state.status,
-                    isChecked: state.isChecked,
-                    isLoading: false);
-                Fluttertoast.showToast(
-                    msg: "Usuario actualizado correctamente",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.green,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-                Navigator.pop(event.context);
-              } else {
-                yield ProfileEditState(
-                    dni: state.dni,
-                    name: state.name,
-                    lastname: state.lastname,
-                    username: state.username,
-                    email: state.email,
-                    phone: state.phone,
-                    password: state.password,
-                    typeUser: state.typeUser,
-                    status: state.status,
-                    isChecked: state.isChecked,
-                    isLoading: false);
-                Fluttertoast.showToast(
-                    msg: "No se pudo actualizar el usuario",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-              }
             } else {
               yield ProfileEditState(
                   dni: state.dni,

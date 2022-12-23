@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:raymism/shared/colors.dart';
+import 'package:raymism/shared/constants.dart';
 
 class AppBarEvent extends StatelessWidget with PreferredSizeWidget {
   final Function onPressed;
@@ -12,9 +14,9 @@ class AppBarEvent extends StatelessWidget with PreferredSizeWidget {
         icon: const Icon(Icons.arrow_back),
         onPressed: () => onPressed(),
       ),
-        title: const Text('Denunciar Delito',
-            style: TextStyle(color: Color(0xFFEFEFEF))),
-        backgroundColor: const Color(0xFF36A32C));
+        title: const Text(Constants.registerEvent,
+            style: TextStyle(color: CustomColor.white)),
+        backgroundColor: CustomColor.primaryColor);
   }
 
   @override

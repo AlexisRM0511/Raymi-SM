@@ -1,13 +1,8 @@
-import 'dart:convert';
 import 'package:dbcrypt/dbcrypt.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as https;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:raymism/shared/constants.dart';
 import 'package:raymism/shared/utils.dart';
-import '/rest_services/response_data.dart';
 import '/rest_services/users/user_model.dart';
 import '/rest_services/users/user_repository.dart';
 
@@ -48,20 +43,29 @@ class UserService implements UserRepository {
   @override
   Future<UserModel?> getUserById(String id) async {
     return await collectionUsers.doc(id).get().then((value) {
-      UserModel userModel =
-          UserModel.fromJson(value.data() as Map<String, dynamic>);
-      Utils.alertSuccess("Bienvenido ${userModel.name}");
-      return userModel;
+      return UserModel.fromJson(value.data() as Map<String, dynamic>);
     }).catchError((e) {
-      Utils.alertError(Constants.errorLogin);
+      Utils.alertError(Constants.errorGettingUser);
     });
   }
 
   @override
-  Future<String?> updateUser(UserModel user) async {}
+  Future<void> updateUser(UserModel user) async {
+    return await collectionUsers
+        .doc(user.id)
+        .update(user.toJson())
+        .then((value) => Utils.alertSuccess(Constants.userUpdated))
+        .catchError((e) => Utils.alertError(Constants.errorUpdatingUser));
+  }
 
   @override
-  Future<String?> deleteUser(String id) async {}
+  Future<void> deleteUser(String id) async {
+    return await collectionUsers
+        .doc(id)
+        .delete()
+        .then((value) => Utils.alertSuccess(Constants.userDeleted))
+        .catchError((e) => Utils.alertError(Constants.errorDeletingUser));
+  }
 
   @override
   Future<UserModel?> signIn(String email, String password) async {

@@ -5,7 +5,7 @@ abstract class EventRepository {
 
   Future<EventModel?> getEventById(String id);
 
-  Future<EventModel?> createEvent(EventModel event);
+  Future<void> createEvent(EventModel event);
 
   Future<String?> updateEvent(EventModel event);
 

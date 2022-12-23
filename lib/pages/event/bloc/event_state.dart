@@ -8,9 +8,7 @@ class EventState {
   final String location;
   final String photo;
   final int status;
-  final bool isKnown;
   final bool isLoading;
-  final bool isListening;
 
   EventState(
       {this.user = '',
@@ -20,12 +18,10 @@ class EventState {
       this.location = '',
       this.photo = '',
       this.status = -1,
-      this.isKnown = false,
-      this.isLoading = false,
-      this.isListening = false});
+      this.isLoading = false});
 
   @override
   String toString() {
-    return 'EventState{user: $user, title: $title, description: $description, dateAndTime: $dateAndTime, location: $location, photo: $photo, status: $status, isKnown: $isKnown, isLoading: $isLoading}';
+    return 'EventState{user: $user, title: $title, description: $description, dateAndTime: $dateAndTime, location: $location, photo: $photo, status: $status, isLoading: $isLoading}';
   }
 }

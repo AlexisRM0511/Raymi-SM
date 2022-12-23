@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class EventModel {
   String? id;
   String? user;
@@ -7,8 +9,7 @@ class EventModel {
   String? description;
   String? photo;
   int? status;
-  bool? isKnown;
-  DateTime? createdAt;
+  Timestamp? createdAt;
 
   EventModel(
       {this.id,
@@ -19,7 +20,6 @@ class EventModel {
       this.description,
       this.photo,
       this.status,
-      this.isKnown,
       this.createdAt});
 
   EventModel.fromJson(Map<String, dynamic> json) {
@@ -31,8 +31,7 @@ class EventModel {
     description = json['description'] as String;
     photo = json['photo'] as String;
     status = json['status'] as int;
-    isKnown = json['isKnown'] as bool;
-    createdAt = DateTime.parse(json['createdAt'] as String);
+    createdAt = json['createdAt'] as Timestamp;
   }
 
   Map<String, dynamic> toJson() {
@@ -44,14 +43,13 @@ class EventModel {
     if (dateAndTime != null) data['dateAndTime'] = dateAndTime;
     if (description != null) data['description'] = description;
     if (photo != null) data['photo'] = photo;
-    if (status != null) data['status'] = status.toString();
-    if (isKnown != null) data['isKnown'] = isKnown.toString();
-    if (createdAt != null) data['createdAt'] = createdAt.toString();
+    if (status != null) data['status'] = status;
+    if (createdAt != null) data['createdAt'] = createdAt;
     return data;
   }
 
   @override
   String toString() {
-    return 'EventModel{id: $id, user: $user, title: $title, location: $location, dateAndTime: $dateAndTime, description: $description, photo: $photo, status: $status}';
+    return 'EventModel{id: $id, user: $user, title: $title, location: $location, dateAndTime: $dateAndTime, description: $description, photo: $photo, status: $status, createdAt: $createdAt}';
   }
 }

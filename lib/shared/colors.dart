@@ -12,5 +12,6 @@ class CustomColor {
   static const Color black = Colors.black;
   static const Color black2 = Color(0x3F000000);
   static const Color white = Colors.white;
+  static const Color white2 = Color(0xFFE3E3E3);
   static const Color transparent = Colors.transparent;
 }

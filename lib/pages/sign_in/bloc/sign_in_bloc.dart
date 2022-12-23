@@ -26,8 +26,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       yield SignInState(
           email: event.email, password: event.password, isLoading: true);
       if (event.formKey.currentState!.validate()) {
-        yield SignInState(isLoading: false);
         if (await _userController.signIn(event.email, event.password) != null) {
+          yield SignInState(isLoading: false);
           Navigator.pushReplacementNamed(event.context, '/home');
         }
       } else {

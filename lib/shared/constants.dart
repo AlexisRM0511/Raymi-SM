@@ -1,6 +1,9 @@
 class Constants {
   // Texts
   static const String appName = 'Raymi SM';
+  static const String appVersion = '1.0.0';
+  static const String registerEvent = 'Registrar evento';
+
 
   // Paths
   static const String pathLogo = 'assets/icon/logo.png';
@@ -28,4 +31,10 @@ class Constants {
   static const String errorLogin = 'Error al iniciar sesión.';
   static const String credentialsInvalid = 'Credenciales inválidas.';
 
+  // Errors User Service
+  static const String errorGettingUser = 'Error al obtener el usuario.';
+  static const String userUpdated = 'Usuario actualizado.';
+  static const String errorUpdatingUser = 'Error al actualizar el usuario.';
+  static const String userDeleted = 'Usuario eliminado.';
+  static const String errorDeletingUser = 'Error al eliminar el usuario.';
 }
