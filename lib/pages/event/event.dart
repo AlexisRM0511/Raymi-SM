@@ -75,7 +75,7 @@ class _EventState extends State<Event> {
                                 Button(
                                     textColor: CustomColor.white,
                                     buttonColor: CustomColor.primaryColor,
-                                    text: "Registrar Denuncia",
+                                    text: "Registrar Evento",
                                     onPressed: () => eventBloc.add(
                                         EventButtonPressed(
                                             context: context,

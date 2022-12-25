@@ -15,12 +15,20 @@ class EventService implements EventRepository {
 
   @override
   Future<List<EventModel>?> getEvents() async {
-    List<EventModel> events = [];
-    await collectionEvents.get().then((querySnapshot) {
-      for (var result in querySnapshot.docs) {
-        events.add(EventModel.fromJson(result.data() as Map<String, dynamic>));
-      }
-    });
+    try {
+      List<EventModel> events = [];
+      await collectionEvents.get().then((querySnapshot) {
+        for (var result in querySnapshot.docs) {
+          events
+              .add(EventModel.fromJson(result.data() as Map<String, dynamic>));
+        }
+      });
+      print('getEvents: ${events.length}');
+      print('Events: $events');
+      return events;
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override

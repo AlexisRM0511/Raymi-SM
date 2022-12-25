@@ -52,8 +52,9 @@ class EventBloc extends Bloc<EventEvent, EventState> {
                       })
                 ]);
           });
-      print(image);
-      yield EventState(photo: image!.path);
+      if (image != null) {
+        yield EventState(photo: image!.path);
+      }
     }
 
     if (event is RemovePhotoButtonPressedEvent) {

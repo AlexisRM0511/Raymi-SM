@@ -27,9 +27,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           email: event.email, password: event.password, isLoading: true);
       if (event.formKey.currentState!.validate()) {
         if (await _userController.signIn(event.email, event.password) != null) {
-          yield SignInState(isLoading: false);
           Navigator.pushReplacementNamed(event.context, '/home');
         }
+        yield SignInState(isLoading: false);
       } else {
         yield SignInState(isLoading: false);
         Utils.alertError(Constants.credentialsInvalid);

@@ -15,7 +15,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final EventController _eventController = EventController(EventService());
 
-  HomeBloc() : super(HomeState(isLoading: true));
+  HomeBloc() : super(HomeState());
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {

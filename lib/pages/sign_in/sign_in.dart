@@ -77,7 +77,7 @@ class _SignInState extends State<SignIn> {
                             SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height * 0.01),
-                            const Text("Copyright © Limachay 2022")
+                            const Text("Copyright © Raymi SM 2022")
                           ]))))),
           SpinnerLoading(isLoading: state.isLoading)
         ]);
