@@ -9,7 +9,6 @@ import '/rest_services/events/event_service.dart';
 import '/rest_services/users/user_controller.dart';
 import '/rest_services/users/user_model.dart';
 import '/rest_services/users/user_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'profile_event.dart';
 
@@ -19,9 +18,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final EventController _eventController = EventController(EventService());
   final UserController _userController = UserController(UserService());
 
-  ProfileBloc() : super(ProfileState(isLoading: true)) {
-    add(UserFillEvent());
-  }
+  ProfileBloc() : super(ProfileState(isLoading: true));
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
@@ -34,7 +31,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           username: '',
           email: '',
           phone: '',
-          password: '',
           typeUser: -1,
           status: -1,
           isError: false,
@@ -48,7 +44,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     }
 
     if (event is GoEventDetailEvent) {
-      Navigator.pushNamed(event.context, '/event_detail',arguments: event.event);
+      Navigator.pushNamed(event.context, '/event_detail',
+          arguments: event.event);
       Fluttertoast.showToast(
           msg: 'Denunciar ${event.event.title}',
           toastLength: Toast.LENGTH_SHORT,
@@ -61,91 +58,33 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     if (event is UserFillEvent) {
       yield ProfileState(isLoading: true);
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      if (sharedPreferences.containsKey('idFirebase')) {
-        UserModel? user = await _userController.getUserById(
-            sharedPreferences.getString('idFirebase').toString());
-        if (user != null) {
-          List<EventModel>? eventList =
-              await _eventController.getEventsByUser(user.id.toString());
-
-          if (eventList != null) {
-            if (eventList.isNotEmpty) {
-              yield ProfileState(
-                  eventModelList: eventList,
-                  eventMade: eventList
-                      .where((event) => event.user?.split("|")[1] == user.id)
-                      .length,
-                  eventApproved: eventList
-                      .where((event) => event.user == user.id || event.status == 1)
-                      .length,
-                  dni: user.dni.toString(),
-                  name: user.name.toString(),
-                  lastname: user.lastname.toString(),
-                  email: user.email.toString(),
-                  phone: user.phone.toString(),
-                  username: user.username.toString(),
-                  password: user.password.toString(),
-                  isError: false,
-                  message: "",
-                  isLoading: false);
-            } else {
-              yield ProfileState(
-                  eventModelList: const [],
-                  eventMade: 0,
-                  eventApproved: 0,
-                  dni: user.dni.toString(),
-                  name: user.name.toString(),
-                  lastname: user.lastname.toString(),
-                  email: user.email.toString(),
-                  phone: user.phone.toString(),
-                  username: user.username.toString(),
-                  password: user.password.toString(),
-                  isError: true,
-                  message: "No se encontraron Delitos",
-                  isLoading: false);
-            }
-          } else {
-            yield ProfileState(
-                eventModelList: const [],
-                eventMade: 0,
-                eventApproved: 0,
-                dni: user.dni.toString(),
-                name: user.name.toString(),
-                lastname: user.lastname.toString(),
-                email: user.email.toString(),
-                phone: user.phone.toString(),
-                username: user.username.toString(),
-                password: user.password.toString(),
-                isError: true,
-                message: "Registro devuelve Null",
-                isLoading: false);
-          }
-        } else {
-          yield ProfileState(isLoading: false);
-          Fluttertoast.showToast(
-              msg: 'Error al cargar usuario',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        }
-      } else {
-        yield ProfileState(isLoading: false);
-        Fluttertoast.showToast(
-            msg: 'Error al cargar usuario',
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+      UserModel? user = await _userController.getCurrentUser();
+      if (user == null) {
+        return;
       }
+      List<EventModel>? eventModelList =
+          await _eventController.getEventsByUser(user.username as String);
+      if (eventModelList == null) {
+        return;
+      }
+      yield ProfileState(
+          eventModelList: eventModelList,
+          eventMade: eventModelList.length,
+          eventApproved: eventModelList
+              .where((element) => element.status == 1)
+              .toList()
+              .length,
+          dni: user.dni as String,
+          name: user.name as String,
+          lastname: user.lastname as String,
+          username: user.username as String,
+          email: user.email as String,
+          phone: user.phone as String,
+          typeUser: user.typeUser as int,
+          status: user.status as int,
+          isError: false,
+          message: "No se delitos registrados",
+          isLoading: false);
     }
-
-
   }
 }

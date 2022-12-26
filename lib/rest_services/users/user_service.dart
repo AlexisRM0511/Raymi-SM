@@ -41,7 +41,7 @@ class UserService implements UserRepository {
   }
 
   @override
-  Future<UserModel?> getUserById(String id) async {
+  Future<UserModel?> readUser(String id) async {
     return await collectionUsers.doc(id).get().then((value) {
       return UserModel.fromJson(value.data() as Map<String, dynamic>);
     }).catchError((e) {
@@ -50,21 +50,27 @@ class UserService implements UserRepository {
   }
 
   @override
-  Future<void> updateUser(UserModel user) async {
-    return await collectionUsers
-        .doc(user.id)
-        .update(user.toJson())
-        .then((value) => Utils.alertSuccess(Constants.userUpdated))
-        .catchError((e) => Utils.alertError(Constants.errorUpdatingUser));
+  Future<bool> updateUser(UserModel user) async {
+    try {
+      await collectionUsers.doc(user.id).update(user.toJson());
+      Utils.alertSuccess(Constants.userUpdated);
+      return true;
+    } catch (e) {
+      Utils.alertError(Constants.errorUpdatingUser);
+      return false;
+    }
   }
 
   @override
-  Future<void> deleteUser(String id) async {
-    return await collectionUsers
-        .doc(id)
-        .delete()
-        .then((value) => Utils.alertSuccess(Constants.userDeleted))
-        .catchError((e) => Utils.alertError(Constants.errorDeletingUser));
+  Future<bool> deleteUser(String id) async {
+    try {
+      await collectionUsers.doc(id).delete();
+      Utils.alertSuccess(Constants.userDeleted);
+      return true;
+    } catch (e) {
+      Utils.alertError(Constants.errorDeletingUser);
+      return false;
+    }
   }
 
   @override
@@ -72,7 +78,7 @@ class UserService implements UserRepository {
     return await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password)
         .then((userCredential) async {
-      return await getUserById(userCredential.user!.uid);
+      return await readUser(userCredential.user!.uid);
     }).catchError((e) {
       switch ((e as FirebaseAuthException).code) {
         case 'user-not-found':
@@ -95,6 +101,17 @@ class UserService implements UserRepository {
           break;
       }
       return null;
+    });
+  }
+
+  @override
+  Future<UserModel?> getCurrentUser() async {
+    return await FirebaseAuth.instance.currentUser!
+        .reload()
+        .then((value) async {
+      return await readUser(FirebaseAuth.instance.currentUser!.uid);
+    }).catchError((e) {
+      Utils.alertError(Constants.errorGettingUser);
     });
   }
 }

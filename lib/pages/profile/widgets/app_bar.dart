@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raymism/shared/colors.dart';
 
 class AppBarProfile extends StatelessWidget with PreferredSizeWidget {
   final Function onPressed;
@@ -17,8 +18,8 @@ class AppBarProfile extends StatelessWidget with PreferredSizeWidget {
           onPressed: () => onPressed(),
         ),
         title: Text('Perfil de $username',
-            style: const TextStyle(color: Color(0xFFEFEFEF))),
-        backgroundColor: const Color(0xFF36A32C));
+            style: const TextStyle(color: CustomColor.white)),
+        backgroundColor: CustomColor.primaryColor);
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:raymism/pages/sign_in/widgets/button_su.dart';
 import 'package:raymism/shared/colors.dart';
 import '/pages/sign_in/bloc/sign_in_bloc.dart';
 import '../../components/button.dart';
@@ -52,8 +53,6 @@ class _SignInState extends State<SignIn> {
                                 text: 'Contraseña',
                                 textController: _passwordController),
                             Button(
-                                buttonColor: CustomColor.primaryColor,
-                                textColor: CustomColor.white,
                                 text: 'Iniciar Sesión',
                                 onPressed: () => signInBloc.add(
                                     SignInButtonPressedEvent(
@@ -68,9 +67,7 @@ class _SignInState extends State<SignIn> {
                             SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height * 0.01),
-                            Button(
-                                buttonColor: CustomColor.white,
-                                textColor: CustomColor.black,
+                            ButtonSignUp(
                                 text: 'Registrarte',
                                 onPressed: () => signInBloc
                                     .add(GoSignUpEvent(context: context))),

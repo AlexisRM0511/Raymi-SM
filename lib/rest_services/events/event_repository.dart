@@ -1,15 +1,15 @@
 import '/rest_services/events/event_model.dart';
 
 abstract class EventRepository {
-  Future<List<EventModel>?> getEvents();
-
-  Future<EventModel?> getEventById(String id);
-
   Future<void> createEvent(EventModel event);
 
-  Future<String?> updateEvent(EventModel event);
+  Future<EventModel?> readEvent(String id);
 
-  Future<String?> deleteEvent(String id);
+  Future<bool> updateEvent(EventModel event);
+
+  Future<bool> deleteEvent(String id);
+
+  Future<List<EventModel>?> getEvents();
 
   Future<List<EventModel>?> getEventsByTitle(String title);
 

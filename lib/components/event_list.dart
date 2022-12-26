@@ -6,16 +6,12 @@ import '/rest_services/events/event_model.dart';
 
 class EventList extends StatefulWidget {
   final List<EventModel> eventModelList;
-  final String message;
-  final bool isError;
   final bool isLoading;
 
   const EventList(
       {required this.eventModelList,
-      required this.message,
-      required this.isError,
-      required this.isLoading,
-      Key? key})
+        required this.isLoading,
+        Key? key})
       : super(key: key);
 
   @override
@@ -25,11 +21,7 @@ class EventList extends StatefulWidget {
 class _EventListState extends State<EventList> {
   get eventModelList => widget.eventModelList;
 
-  get message => widget.message;
-
   get isLoading => widget.isLoading;
-
-  get isError => widget.isError;
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +31,12 @@ class _EventListState extends State<EventList> {
     return FutureBuilder<List<EventModel>?>(builder: (context, snapshot) {
       if (isLoading) {
         return const Center(child: CircularProgressIndicator());
-      } else if (isError) {
-        return Center(child: Text('Aviso: $message'));
       } else if (eventModelList.isEmpty) {
-        return Center(child: Text('$message'));
+        return const Center(child: Text("No hay eventos disponibles"));
       } else {
         return ListView.separated(
             separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
+            const Divider(),
             itemCount: eventModelList.length,
             padding: const EdgeInsets.all(8.0),
             physics: const NeverScrollableScrollPhysics(),
@@ -62,7 +52,7 @@ class _EventListState extends State<EventList> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           border:
-                              Border.all(color: CustomColor.black, width: 2.0)),
+                          Border.all(color: CustomColor.black, width: 2.0)),
                       child: Row(children: [
                         ClipRRect(
                             borderRadius: const BorderRadius.only(
@@ -70,25 +60,25 @@ class _EventListState extends State<EventList> {
                                 bottomLeft: Radius.circular(8.0)),
                             child: (event.photo!.isEmpty)
                                 ? Image.asset('assets/image_not_found.png',
-                                    width: (MediaQuery.of(context).size.width *
-                                            0.4) -
-                                        20.0,
-                                    height: 150.0 * sizeReference,
-                                    fit: BoxFit.fill,
-                                    alignment: FractionalOffset.center)
+                                width: (MediaQuery.of(context).size.width *
+                                    0.4) -
+                                    20.0,
+                                height: 150.0 * sizeReference,
+                                fit: BoxFit.fill,
+                                alignment: FractionalOffset.center)
                                 : Image.network(event.photo!.toString(),
-                                    width: (MediaQuery.of(context).size.width *
-                                            0.4) -
-                                        20.0,
-                                    height: 150.0 * sizeReference,
-                                    fit: BoxFit.fill,
-                                    alignment: FractionalOffset.center)),
+                                width: (MediaQuery.of(context).size.width *
+                                    0.4) -
+                                    20.0,
+                                height: 150.0 * sizeReference,
+                                fit: BoxFit.fill,
+                                alignment: FractionalOffset.center)),
                         Container(
                             decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(8.0),
                                     bottomRight: Radius.circular(8.0)),
-                                color: Color(0xFF79E070)),
+                                color: CustomColor.primaryColor),
                             width: (MediaQuery.of(context).size.width * 0.6) -
                                 20.0,
                             height: 150.0 * sizeReference,
@@ -102,7 +92,7 @@ class _EventListState extends State<EventList> {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         fontSize: 16.0 * sizeReference,
-                                        color: Colors.black),
+                                        color: CustomColor.white2),
                                   ),
                                   SizedBox(height: 10.0 * sizeReference),
                                   Text('${event.title}',
@@ -111,14 +101,14 @@ class _EventListState extends State<EventList> {
                                       style: TextStyle(
                                           fontSize: 20.0 * sizeReference,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black)),
+                                          color: CustomColor.white)),
                                   SizedBox(height: 10.0 * sizeReference),
                                   Text('${event.description}',
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           fontSize: 14.0 * sizeReference,
-                                          color: Colors.black)),
+                                          color: CustomColor.white2)),
                                   SizedBox(height: 10.0 * sizeReference),
                                   Text(
                                       'Reportado por ${(event.user != "") ? event.user!.split("|")[0] : 'N/A'}',
@@ -126,7 +116,7 @@ class _EventListState extends State<EventList> {
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           fontSize: 12.0 * sizeReference,
-                                          color: Colors.black))
+                                          color: CustomColor.white2))
                                 ]))
                       ])));
             });

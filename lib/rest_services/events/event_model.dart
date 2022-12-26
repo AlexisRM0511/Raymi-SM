@@ -36,7 +36,7 @@ class EventModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (id != null) data['_id'] = id;
+    if (id != null) data['id'] = id;
     if (user != null) data['user'] = user;
     if (title != null) data['title'] = title;
     if (location != null) data['location'] = location;

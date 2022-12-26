@@ -73,8 +73,6 @@ class _EventState extends State<Event> {
                                     onPressedDelete: () => eventBloc
                                         .add(RemovePhotoButtonPressedEvent())),
                                 Button(
-                                    textColor: CustomColor.white,
-                                    buttonColor: CustomColor.primaryColor,
                                     text: "Registrar Evento",
                                     onPressed: () => eventBloc.add(
                                         EventButtonPressed(

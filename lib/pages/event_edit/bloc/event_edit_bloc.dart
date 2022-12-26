@@ -71,7 +71,7 @@ class EventEditBloc extends Bloc<EventEditEvent, EventEditState> {
               fontSize: 16.0);
         }
       }
-      String? messageConfirm = await _eventController.updateEvent(EventModel(
+      if(await _eventController.updateEvent(EventModel(
         id: event.id,
         user: state.user.split("|")[1],
         title: state.title,
@@ -80,26 +80,8 @@ class EventEditBloc extends Bloc<EventEditEvent, EventEditState> {
         location: state.location,
         photo: link,
         status: state.status,
-      ));
-      if (messageConfirm != null) {
-        Fluttertoast.showToast(
-            msg: 'Denuncia actualizada con éxito',
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.green,
-            textColor: Colors.white,
-            fontSize: 16.0);
+      ))){
         Navigator.pop(event.context);
-      } else {
-        Fluttertoast.showToast(
-            msg: 'Error al actualizar la denuncia',
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
       }
       yield EventEditState(isLoading: false);
     }

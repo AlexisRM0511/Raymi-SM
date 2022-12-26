@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:raymism/components/button.dart';
-import 'package:raymism/shared/colors.dart';
-
 import '/pages/sign_up/bloc/sign_up_bloc.dart';
 import '/pages/sign_up/widgets/input_password_confirm_form.dart';
 import '/pages/sign_up/widgets/input_dni_form.dart';
@@ -90,8 +88,6 @@ class _SignUpState extends State<SignUp> {
                                     "- Uno de los siguientes caracteres (@!%*?&)\n"
                                     "- Una longitud mínima de 8 caracteres"),
                             Button(
-                              textColor: CustomColor.white,
-                                buttonColor: CustomColor.primaryColor,
                                 text: "Registrarte",
                                 onPressed: () => signUpBloc.add(
                                     SignUpButtonPressedEvent(

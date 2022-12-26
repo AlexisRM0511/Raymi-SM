@@ -125,7 +125,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();
           if (sharedPreferences.containsKey('idFirebase')) {
-            UserModel? user = await _userController.getUserById(
+            UserModel? user = await _userController.readUser(
                 sharedPreferences.getString('idFirebase').toString());
             if (user != null) {
               await _userController.updateUser(
@@ -236,7 +236,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       if (sharedPreferences.containsKey('idFirebase')) {
-        UserModel? user = await _userController.getUserById(
+        UserModel? user = await _userController.readUser(
             sharedPreferences.getString('idFirebase').toString());
         if (user != null) {
           yield ProfileEditState(

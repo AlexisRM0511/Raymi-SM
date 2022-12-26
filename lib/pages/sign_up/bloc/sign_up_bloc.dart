@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:dbcrypt/dbcrypt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:raymism/shared/constants.dart';
 import 'package:raymism/shared/utils.dart';
 import '/rest_services/users/user_controller.dart';
 import '/rest_services/users/user_model.dart';
@@ -47,7 +47,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           if (user != null) {
             Utils.alertSuccess("Bienvenido ${user.username}");
           } else {
-            Utils.alertError("Error al crear el usuario");
+            Utils.alertError(Constants.errorCreatingUser);
           }
           yield SignUpState(isLoading: false);
           Navigator.pushReplacementNamed(event.context, '/home');

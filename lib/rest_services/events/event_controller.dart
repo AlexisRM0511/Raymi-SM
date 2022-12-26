@@ -6,18 +6,18 @@ class EventController {
 
   EventController(this._eventRepository);
 
-  Future<List<EventModel>?> getEvents() async => _eventRepository.getEvents();
-
-  Future<EventModel?> getEventById(String id) async =>
-      _eventRepository.getEventById(id);
-
   Future<void> createEvent(EventModel event) async =>
       _eventRepository.createEvent(event);
 
-  Future<String?> updateEvent(EventModel event) async =>
+  Future<EventModel?> readEvent(String id) async =>
+      _eventRepository.readEvent(id);
+
+  Future<bool> updateEvent(EventModel event) async =>
       _eventRepository.updateEvent(event);
 
-  Future<String?> deleteEvent(String id) async => _eventRepository.deleteEvent(id);
+  Future<bool> deleteEvent(String id) async => _eventRepository.deleteEvent(id);
+
+  Future<List<EventModel>?> getEvents() async => _eventRepository.getEvents();
 
   Future<List<EventModel>?> getEventsByTitle(String title) async =>
       _eventRepository.getEventsByTitle(title);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:raymism/components/button.dart';
+import 'package:raymism/components/event_list.dart';
 import 'package:raymism/components/image_logo.dart';
 import 'package:raymism/components/spinner_loading.dart';
 import 'package:raymism/components/label.dart';
@@ -10,7 +11,6 @@ import '/pages/home/widgets/app_bar.dart';
 import '/pages/home/widgets/dialog_confirm.dart';
 import '/pages/home/widgets/input_redirect.dart';
 import '/pages/home/widgets/event_info.dart';
-import '/pages/home/widgets/event_list.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -72,8 +72,6 @@ class _HomeState extends State<Home> {
                             const Label(
                                 text: "¿Te perdiste? Te ayudamos a ubicarte"),
                             Button(
-                                buttonColor: CustomColor.primaryColor,
-                                textColor: CustomColor.white,
                                 text: "Ver Mapa",
                                 onPressed: () =>
                                     homeBloc.add(GoStatisticsEvent())),
@@ -83,8 +81,6 @@ class _HomeState extends State<Home> {
                                     homeBloc.add(ReloadEventsEvent())),
                             EventList(
                                 eventModelList: state.eventModelList,
-                                message: state.message,
-                                isError: state.isError,
                                 isLoading: state.isLoading),
                           ])))),
               SpinnerLoading(isLoading: state.isLoading)

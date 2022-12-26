@@ -6,13 +6,13 @@ class ProfileState {
   final bool isError;
   final int eventMade;
   final int eventApproved;
+
   final String dni;
   final String name;
   final String lastname;
   final String username;
   final String email;
   final String phone;
-  final String password;
   final int typeUser;
   final int status;
   final bool isLoading;
@@ -29,7 +29,6 @@ class ProfileState {
       this.username = '',
       this.email = '',
       this.phone = '',
-      this.password = '',
       this.typeUser = 0,
       this.status = 1,
       this.isLoading = false});
