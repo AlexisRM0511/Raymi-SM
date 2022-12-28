@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:raymism/components/button.dart';
+import 'package:raymism/components/spinner_loading.dart';
 import '/pages/sign_up/bloc/sign_up_bloc.dart';
 import '/pages/sign_up/widgets/input_password_confirm_form.dart';
 import '/pages/sign_up/widgets/input_dni_form.dart';
@@ -10,7 +11,6 @@ import '/pages/sign_up/widgets/input_name_form.dart';
 import '/pages/sign_up/widgets/input_password_form.dart';
 import '/pages/sign_up/widgets/input_phone_form.dart';
 import '/pages/sign_up/widgets/input_username_form.dart';
-import '/pages/sign_up/widgets/spinner_loading.dart';
 import '/pages/sign_up/widgets/text_info_password_form.dart';
 import '/pages/sign_up/widgets/text_signup_form.dart';
 

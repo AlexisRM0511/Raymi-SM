@@ -52,7 +52,22 @@ class UserService implements UserRepository {
   @override
   Future<bool> updateUser(UserModel user) async {
     try {
-      await collectionUsers.doc(user.id).update(user.toJson());
+      UserModel? userToUpdate =
+          await readUser(FirebaseAuth.instance.currentUser!.uid);
+      if (userToUpdate == null) {
+        Utils.alertError(Constants.errorGettingUser);
+        return false;
+      }
+      userToUpdate.name = user.name;
+      userToUpdate.dni = user.dni;
+      userToUpdate.lastname = user.lastname;
+      userToUpdate.username = user.username;
+      userToUpdate.email = user.email;
+      userToUpdate.phone = user.phone;
+      FirebaseAuth.instance.currentUser?.reload();
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      currentUser?.reload().then((_) => currentUser.updateEmail(user.email!));
+      await collectionUsers.doc(userToUpdate.id).update(userToUpdate.toJson());
       Utils.alertSuccess(Constants.userUpdated);
       return true;
     } catch (e) {

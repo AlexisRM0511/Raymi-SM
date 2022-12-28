@@ -7,11 +7,9 @@ class ProfileEditState {
   final String username;
   final String email;
   final String phone;
-  final String password;
   final int typeUser;
   final int status;
   final bool isLoading;
-  final bool isChecked;
 
   ProfileEditState({this.dni = '',
     this.name = '',
@@ -19,16 +17,13 @@ class ProfileEditState {
     this.username = '',
     this.email = '',
     this.phone = '',
-    this.password = '',
     this.typeUser = 0,
     this.status = 1,
-    this.isLoading = false,
-    this.isChecked = false});
-
+    this.isLoading = false});
 
   @override
   String toString() {
-    return 'ProfileEditState{dni: $dni, name: $name, lastname: $lastname, username: $username, email: $email, phone: $phone, password: $password, typeUser: $typeUser, status: $status, isLoading: $isLoading, isChecked: $isChecked}';
+    return 'ProfileEditState{dni: $dni, name: $name, lastname: $lastname, username: $username, email: $email, phone: $phone, typeUser: $typeUser, status: $status, isLoading: $isLoading}';
   }
 }
 

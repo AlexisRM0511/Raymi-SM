@@ -11,8 +11,6 @@ class LeadingIconButtonPressedEvent extends ProfileEditEvent {
 
 class UserFillEvent extends ProfileEditEvent {}
 
-class CheckBoxFormPressedEvent extends ProfileEditEvent {}
-
 class UpdateProfileEvent extends ProfileEditEvent {
   final BuildContext context;
   final GlobalKey<FormState> formKey;
@@ -22,8 +20,6 @@ class UpdateProfileEvent extends ProfileEditEvent {
   final String username;
   final String email;
   final String phone;
-  final String password;
-  final String passwordBefore;
 
   UpdateProfileEvent(
       {required this.context,
@@ -33,7 +29,5 @@ class UpdateProfileEvent extends ProfileEditEvent {
       required this.lastname,
       required this.username,
       required this.email,
-      required this.phone,
-      required this.password,
-      required this.passwordBefore});
+      required this.phone});
 }

@@ -7,7 +7,7 @@ class Constants {
   static const String registerUser = 'Registrar usuario';
   static const String updateUser = 'Actualizar usuario';
   static const String eventsForUser = 'Eventos creados por el usuario';
-
+  static const String recordNotFound = 'No se encontraron registros';
 
   // Paths
   static const String pathLogo = 'assets/icon/logo.png';

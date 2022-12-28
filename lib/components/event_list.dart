@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:raymism/shared/colors.dart';
+import 'package:raymism/shared/constants.dart';
 import '/pages/home/bloc/home_bloc.dart';
 import '/rest_services/events/event_model.dart';
 
@@ -32,7 +33,7 @@ class _EventListState extends State<EventList> {
       if (isLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (eventModelList.isEmpty) {
-        return const Center(child: Text("No hay eventos disponibles"));
+        return const Center(child: Text(Constants.recordNotFound));
       } else {
         return ListView.separated(
             separatorBuilder: (BuildContext context, int index) =>

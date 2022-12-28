@@ -31,10 +31,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           username: '',
           email: '',
           phone: '',
-          typeUser: -1,
-          status: -1,
-          isError: false,
-          message: "No se delitos registrados",
           isLoading: false);
       Navigator.pop(event.context);
     }
@@ -80,10 +76,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           username: user.username as String,
           email: user.email as String,
           phone: user.phone as String,
-          typeUser: user.typeUser as int,
-          status: user.status as int,
-          isError: false,
-          message: "No se delitos registrados",
           isLoading: false);
     }
   }
