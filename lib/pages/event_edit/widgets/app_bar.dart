@@ -12,7 +12,7 @@ class AppBarEventEdit extends StatelessWidget with PreferredSizeWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => onPressed(),
         ),
-        title: const Text('Denunciar Delito',
+        title: const Text('EventoDelito',
             style: TextStyle(color: Color(0xFFEFEFEF))),
         backgroundColor: const Color(0xFF36A32C));
   }

@@ -15,8 +15,6 @@ class _ImageEventState extends State<ImageEvent> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-        borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(8.0), bottomLeft: Radius.circular(8.0)),
         child: (image.isEmpty)
             ? Image.asset('assets/image_not_found.png',
                 width: MediaQuery.of(context).size.width,

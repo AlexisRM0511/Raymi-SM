@@ -43,7 +43,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       Navigator.pushNamed(event.context, '/event_detail',
           arguments: event.event);
       Fluttertoast.showToast(
-          msg: 'Denunciar ${event.event.title}',
+          msg: 'Evento${event.event.title}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,

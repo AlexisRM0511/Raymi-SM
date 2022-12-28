@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:raymism/shared/colors.dart';
 import '/pages/event_detail/widgets/image_event.dart';
 import '/pages/event_detail/widgets/text_event_data.dart';
 import '/pages/event_detail/widgets/text_event_info.dart';
@@ -34,7 +35,7 @@ class _SearchPageState extends State<EventDetail> {
                 child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
-                    decoration: const BoxDecoration(color: Color(0xFFEFEFEF)),
+                    color: CustomColor.backgroundColor,
                     child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         padding: const EdgeInsets.only(bottom: 10.0),
