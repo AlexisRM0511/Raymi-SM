@@ -18,18 +18,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   @override
   Stream<SearchState> mapEventToState(SearchEvent event) async* {
     if (event is LeadingIconButtonPressedEvent) {
-      yield SearchState(
-          isLoading: false,
-          isError: false,
-          message: "Escriba el título del delito a buscar",
-          eventModelList: const []);
+      yield SearchState(isLoading: false, eventModelList: const []);
       Navigator.pop(event.context);
     }
 
     if (event is GoEventDetailEvent) {
-      Navigator.pushNamed(event.context, '/event_detail',arguments: event.event);
+      Navigator.pushNamed(event.context, '/event_detail',
+          arguments: event.event);
       Fluttertoast.showToast(
-          msg: 'Evento${event.event.title}',
+          msg: 'Evento ${event.event.title}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -52,27 +49,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         yield SearchState(isLoading: true);
         List<EventModel>? events =
             await _eventController.getEventsByTitle(event.search);
-        if (events != null) {
-          if (events.isNotEmpty) {
-            yield SearchState(
-                isLoading: false,
-                isError: false,
-                message: "",
-                eventModelList: events);
-          } else {
-            yield SearchState(
-                isLoading: false,
-                isError: false,
-                message: "No se encontraron Delitos",
-                eventModelList: const []);
-          }
-        } else {
-          yield SearchState(
-              isLoading: false,
-              isError: true,
-              message: "Registro devuelve Null",
-              eventModelList: const []);
-        }
+        yield SearchState(isLoading: false, eventModelList: events ?? []);
       }
     }
   }

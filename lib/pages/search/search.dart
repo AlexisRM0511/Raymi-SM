@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:raymism/components/event_list.dart';
 import '/pages/search/bloc/search_bloc.dart';
 import '/pages/search/widgets/app_bar.dart';
 import '/pages/search/widgets/input_search.dart';
-import '/pages/search/widgets/event_list.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -42,8 +42,6 @@ class _SearchPageState extends State<Search> {
                           const SizedBox(height: 10.0),
                           EventList(
                               eventModelList: state.eventModelList,
-                              message: state.message,
-                              isError: state.isError,
                               isLoading: state.isLoading)
                         ]))))
           ]);

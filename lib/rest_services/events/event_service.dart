@@ -64,7 +64,11 @@ class EventService implements EventRepository {
         events.add(EventModel.fromJson(element.data() as Map<String, dynamic>));
       }
       events.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
-      Utils.alertSuccess(Constants.eventsGetted);
+      if(events.isEmpty) {
+        Utils.alertError(Constants.recordNotFound);
+      } else {
+        Utils.alertSuccess(Constants.eventsGetted);
+      }
       return events;
     }).catchError((error) {
       Utils.alertError(Constants.errorGettingEvents);
@@ -73,8 +77,10 @@ class EventService implements EventRepository {
 
   @override
   Future<List<EventModel>?> getEventsByTitle(String title) async {
+    // create a query where the 'title' field includes the search term
+    var query = collectionEvents.where('title', isEqualTo: title);
     return await collectionEvents
-        .where("title", isEqualTo: title)
+        .where("title", isGreaterThanOrEqualTo: title)
         .get()
         .then((querySnapshot) {
       List<EventModel> events = [];
@@ -82,7 +88,11 @@ class EventService implements EventRepository {
         events.add(EventModel.fromJson(element.data() as Map<String, dynamic>));
       }
       events.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
-      Utils.alertSuccess(Constants.eventsGetted);
+      if(events.isEmpty) {
+        Utils.alertError(Constants.recordNotFound);
+      } else {
+        Utils.alertSuccess(Constants.eventsGetted);
+      }
       return events;
     }).catchError((error) {
       Utils.alertError(Constants.errorGettingEvents);
@@ -100,7 +110,11 @@ class EventService implements EventRepository {
         events.add(EventModel.fromJson(element.data() as Map<String, dynamic>));
       }
       events.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
-      Utils.alertSuccess(Constants.eventsGetted);
+      if(events.isEmpty) {
+        Utils.alertError(Constants.recordNotFound);
+      } else {
+        Utils.alertSuccess(Constants.eventsGetted);
+      }
       return events;
     }).catchError((error) {
       Utils.alertError(Constants.errorGettingEvents);
