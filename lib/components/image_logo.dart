@@ -10,7 +10,7 @@ class ImageLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Image.asset('assets/loginLogo.png',
+        child: Image.asset('assets/icon/logo_red.png',
             width: MediaQuery.of(context).size.width * width,
             height: MediaQuery.of(context).size.height * height));
   }

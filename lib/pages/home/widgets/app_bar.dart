@@ -21,7 +21,7 @@ class AppBarHome extends StatelessWidget with PreferredSizeWidget {
         backgroundColor: CustomColor.primaryColor,
         leading: Container(
             alignment: Alignment.center,
-            child: Image.asset(Constants.pathLogo,
+            child: Image.asset(Constants.pathLogoWhite,
                 width: 40, height: 40, fit: BoxFit.cover)),
         actions: [
           IconButton(

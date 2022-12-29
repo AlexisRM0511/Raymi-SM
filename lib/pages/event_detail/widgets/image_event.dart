@@ -19,12 +19,12 @@ class _ImageEventState extends State<ImageEvent> {
             ? Image.asset('assets/image_not_found.png',
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.2,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
                 alignment: FractionalOffset.center)
             : Image.network(image,
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.2,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
                 alignment: FractionalOffset.center));
   }
 }

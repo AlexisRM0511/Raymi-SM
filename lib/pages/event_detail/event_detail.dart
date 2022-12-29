@@ -20,7 +20,8 @@ class EventDetail extends StatefulWidget {
 class _SearchPageState extends State<EventDetail> {
   @override
   Widget build(BuildContext context) {
-    EventModel params = ModalRoute.of(context)?.settings.arguments as EventModel;
+    EventModel params =
+        ModalRoute.of(context)?.settings.arguments as EventModel;
     final eventDetailBloc = BlocProvider.of<EventDetailBloc>(context);
 
     return Scaffold(
@@ -45,15 +46,16 @@ class _SearchPageState extends State<EventDetail> {
                               idUser: params.user!,
                               title: params.title!,
                               status: params.status!,
-                              onPressed: () => eventDetailBloc.add(GoEventEditEvent(
-                                  context: context, event: params))),
+                              onPressed: () => eventDetailBloc.add(
+                                  GoEventEditEvent(
+                                      context: context, event: params))),
                           const TextEventInfo(text: 'Descripción:'),
                           TextEventData(text: params.description!),
                           const TextEventInfo(text: 'Fecha y Hora:'),
                           TextEventData(text: params.dateAndTime!),
                           const TextEventInfo(text: 'Ubicación:'),
                           TextEventData(text: params.location!),
-                          const TextEventInfo(text: 'Reportado por:'),
+                          const TextEventInfo(text: 'Creado por:'),
                           TextEventData(text: params.user!.split("|")[0])
                         ]))))
           ]);

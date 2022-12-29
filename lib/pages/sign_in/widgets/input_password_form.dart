@@ -51,11 +51,13 @@ class _InputPasswordFormState extends State<InputPasswordForm> {
                     hintText: text,
                     contentPadding: const EdgeInsets.only(left: 14.0),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: CustomColor.white),
+                      borderSide:
+                          const BorderSide(color: CustomColor.primaryColor),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: const BorderSide(color: CustomColor.white),
+                      borderSide:
+                          const BorderSide(color: CustomColor.primaryColor),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     suffixIcon: IconButton(
