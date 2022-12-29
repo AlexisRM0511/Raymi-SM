@@ -55,20 +55,23 @@ class _HomeState extends State<Home> {
                           padding:
                               const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Column(children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
                             InputRedirect(
                                 hint: "Buscar",
-                                icon: const Icon(Icons.search),
+                                icon: const Icon(Icons.search,
+                                    color: CustomColor.primaryColor),
                                 onPressed: () => homeBloc
                                     .add(GoSearchEvent(context: context))),
-                            const ImageLogo(width: 0.5, height: 0.3),
                             const Label(
                                 text: "¿Deseas registrar algún evento?"),
                             InputRedirect(
                                 hint: "Registrar evento",
-                                icon:
-                                    const Icon(Icons.pending_actions_outlined),
-                                onPressed: () =>
-                                    homeBloc.add(GoEventEvent(context: context))),
+                                icon: const Icon(Icons.pending_actions_outlined,
+                                    color: CustomColor.primaryColor),
+                                onPressed: () => homeBloc
+                                    .add(GoEventEvent(context: context))),
                             const Label(
                                 text: "¿Te perdiste? Te ayudamos a ubicarte"),
                             Button(

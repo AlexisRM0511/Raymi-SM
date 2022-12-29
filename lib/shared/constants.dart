@@ -10,7 +10,8 @@ class Constants {
   static const String recordNotFound = 'No se encontraron registros';
 
   // Paths
-  static const String pathLogo = 'assets/icon/logo.png';
+  static const String pathLogoWhite = 'assets/icon/logo_white.png';
+  static const String pathLogoRed = 'assets/icon/logo_red.png';
 
   // Regex
   static const String reggexEmail =

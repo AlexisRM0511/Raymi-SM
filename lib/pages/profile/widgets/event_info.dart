@@ -16,9 +16,7 @@ class EventInfo extends StatelessWidget {
 
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 30.0),
-          child: Text(text, style: style)),
+          alignment: Alignment.centerLeft, child: Text(text, style: style)),
       Container(
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.only(right: 20.0),

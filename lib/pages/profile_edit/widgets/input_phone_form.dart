@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raymism/shared/colors.dart';
 
 class InputPhoneForm extends StatelessWidget {
   final String text;
@@ -29,11 +30,13 @@ class InputPhoneForm extends StatelessWidget {
                     hintText: text,
                     contentPadding: const EdgeInsets.only(left: 14.0),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide:
+                          const BorderSide(color: CustomColor.primaryColor),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide:
+                          const BorderSide(color: CustomColor.primaryColor),
                       borderRadius: BorderRadius.circular(10.0),
                     )),
                 validator: (value) {
