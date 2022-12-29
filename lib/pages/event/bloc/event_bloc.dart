@@ -76,7 +76,7 @@ class EventBloc extends Bloc<EventEvent, EventState> {
           description: state.description,
           dateAndTime: state.dateAndTime,
           location: state.location,
-          status: -1,
+          status: 0,
           photo: state.photo);
       if (state.photo != '') {
         await (await FirebaseStorage.instance

@@ -63,12 +63,12 @@ class _TextEventTitleState extends State<TextEventTitle> {
                   Icon(
                       status == 1
                           ? Icons.check_circle_sharp
-                          : status == 0
+                          : status == -1
                               ? Icons.remove_circle_sharp
                               : Icons.add_circle_sharp,
                       color: status == 1
                           ? Colors.lightGreen
-                          : status == 0
+                          : status == -1
                               ? Colors.redAccent
                               : Colors.orangeAccent,
                       size: 25.0),
@@ -77,7 +77,7 @@ class _TextEventTitleState extends State<TextEventTitle> {
                           disabledColor: Colors.grey,
                           color: Colors.black,
                           icon: const Icon(Icons.create_rounded, size: 25.0),
-                          onPressed: status == -1 ? () => onPressed() : null,
+                          onPressed: status == 0 ? () => onPressed() : null,
                         )
                       : Container()
                 ])
