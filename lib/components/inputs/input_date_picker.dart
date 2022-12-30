@@ -34,11 +34,10 @@ class _InputDatePickerFormState extends State<InputDatePicker> {
                   onTap: () async {
                     // capturar la fecha y hora
                     final DateTime? picked = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(DateTime.now().year - 1),
-                      lastDate: DateTime(DateTime.now().year + 1),
-                    );
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(DateTime.now().year - 1),
+                        lastDate: DateTime(DateTime.now().year + 100));
                     if (picked != null) {
                       setState(() {
                         textController.text =

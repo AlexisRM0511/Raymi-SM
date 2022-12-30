@@ -64,6 +64,7 @@ class _HomeState extends State<Home> {
                                     color: CustomColor.primaryColor),
                                 onPressed: () => homeBloc
                                     .add(GoSearchEvent(context: context))),
+                            const ImageLogo(width: 0.5, height: 0.3),
                             const Label(
                                 text: "¿Deseas registrar algún evento?"),
                             InputRedirect(
